@@ -1,0 +1,54 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.4.10' apply true
+    id "org.jlleitschuh.gradle.ktlint" version "8.2.0"
+}
+
+ext {
+    versions = [
+            springBoot    : "2.3.3.RELEASE",
+            coroutines    : "1.3.3",
+            testContainers: "1.11.2",
+            ktorClient    : "1.2.5",
+            springDoc     : "1.4.3",
+            springCloud   : '3.0.8.RELEASE',
+            springNats    : '0.4.0'
+    ]
+}
+
+subprojects {
+    apply plugin: "org.jlleitschuh.gradle.ktlint"
+    apply plugin: "org.jetbrains.kotlin.jvm"
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation platform("org.springframework.boot:spring-boot-dependencies:${versions.springBoot}")
+        implementation platform("org.jetbrains.kotlinx:kotlinx-coroutines-bom:${versions.coroutines}")
+        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+        implementation "org.jetbrains.kotlinx:kotlinx-coroutines-jdk8"
+        implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core"
+
+        constraints {
+            api "org.springframework.boot:spring-boot-starter-webflux:${versions.boot}"
+            api "org.testcontainers:testcontainers:${versions.testContainers}"
+            api "io.swagger.core.v3:swagger-annotations:2.1.4"
+        }
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}

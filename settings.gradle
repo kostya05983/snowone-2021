@@ -1,0 +1,8 @@
+rootProject.name = 'Server-bomber'
+include 'api'
+include 'core'
+include ':model'
+include ':core:service'
+include ':client'
+include ":client:devices"
+include 'bomber-daemon'
