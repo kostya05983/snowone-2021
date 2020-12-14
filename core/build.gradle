@@ -3,6 +3,7 @@ dependencies {
     implementation "org.springframework.data:spring-data-mongodb"
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-reactor"
+    api 'org.mongodb:mongodb-driver-reactivestreams'
 }
 
 

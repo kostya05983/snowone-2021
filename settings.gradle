@@ -1,3 +1,4 @@
 rootProject.name = 'snowone-2021'
 
 include 'api'
+include 'core'
