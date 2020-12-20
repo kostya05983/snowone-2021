@@ -1,10 +1,10 @@
 dependencies {
-    implementation project(":core:service")
-    implementation project(":model")
+    api project(":core:common")
     implementation "org.springframework.boot:spring-boot-starter-webflux:${versions.springBoot}"
     implementation "org.springframework.data:spring-data-mongodb"
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-reactor"
+    api 'org.mongodb:mongodb-driver-reactivestreams'
 }
 
 

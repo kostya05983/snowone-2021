@@ -3,7 +3,7 @@ package ru.kontur.users.api.controller
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.*
-import ru.kontur.users.api.dto.CreateUserRequest
+import ru.kontur.users.api.dto.request.CreateUserRequest
 import ru.kontur.users.api.service.UsersService
 
 @RestController

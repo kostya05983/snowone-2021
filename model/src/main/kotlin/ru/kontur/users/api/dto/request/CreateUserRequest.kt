@@ -1,4 +1,6 @@
-package ru.kontur.users.api.dto
+package ru.kontur.users.api.dto.request
+
+import ru.kontur.users.api.dto.users.UserRoleDto
 
 data class CreateUserRequest(
     val email: String,

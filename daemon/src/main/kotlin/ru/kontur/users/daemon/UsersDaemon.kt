@@ -3,14 +3,14 @@ package ru.kontur.users.daemon
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import ru.kontur.users.daemon.worker.UsersDaemonWorker
 
 @SpringBootApplication
 class UsersDaemon(
-
+    private val usersDaemonWorker: UsersDaemonWorker
 ) : CommandLineRunner {
-
     override fun run(vararg args: String?) {
-        TODO("Not yet implemented")
+        usersDaemonWorker.start()
     }
 }
 

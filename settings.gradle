@@ -1,6 +1,7 @@
 rootProject.name = 'snowone-2021'
 
 include 'api'
-include 'core'
+include ':core:service'
+include ':core:common'
 include 'model'
 include 'daemon'

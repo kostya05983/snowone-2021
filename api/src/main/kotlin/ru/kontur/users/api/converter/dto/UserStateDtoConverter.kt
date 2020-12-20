@@ -1,7 +1,7 @@
 package ru.kontur.users.api.converter.dto
 
 import org.springframework.core.convert.converter.Converter
-import ru.kontur.users.api.dto.UserStateDto
+import ru.kontur.users.api.dto.users.UserStateDto
 import ru.kontur.users.api.model.UserState
 
 object UserStateDtoConverter : Converter<UserState, UserStateDto> {

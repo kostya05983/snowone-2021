@@ -1,4 +1,4 @@
-package ru.kontur.users.api.dto
+package ru.kontur.users.api.dto.users
 
 data class UserDto(
     val id: String,
