@@ -1,4 +1,4 @@
-package ru.kontur.kinfra
+package ru.kontur.kinfra.events
 
 abstract class DatabaseEvent<ACTION> {
     abstract var traceId: String

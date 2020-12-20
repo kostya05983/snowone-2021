@@ -1,4 +1,4 @@
-package ru.kontur.kinfra
+package ru.kontur.kinfra.events
 
 import com.mongodb.client.model.changestream.OperationType
 import com.mongodb.client.model.changestream.UpdateDescription

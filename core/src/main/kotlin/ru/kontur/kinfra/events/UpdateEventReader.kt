@@ -1,4 +1,4 @@
-package ru.kontur.kinfra
+package ru.kontur.kinfra.events
 
 import org.bson.Document
 import org.bson.codecs.Codec

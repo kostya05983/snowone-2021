@@ -1,9 +1,9 @@
 package ru.kontur.users.api.model.users.events
 
-import ru.kontur.kinfra.Action
-import ru.kontur.kinfra.DatabaseEvent
-import ru.kontur.kinfra.EntityEvent
-import ru.kontur.kinfra.EntityType
+import ru.kontur.kinfra.events.Action
+import ru.kontur.kinfra.events.DatabaseEvent
+import ru.kontur.kinfra.events.EntityEvent
+import ru.kontur.kinfra.events.EntityType
 import ru.kontur.users.api.model.UserRole
 import java.time.Instant
 import java.util.*

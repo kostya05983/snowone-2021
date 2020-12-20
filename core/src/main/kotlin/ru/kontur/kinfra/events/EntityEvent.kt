@@ -1,4 +1,4 @@
-package ru.kontur.kinfra
+package ru.kontur.kinfra.events
 
 import java.time.Instant
 import java.util.*

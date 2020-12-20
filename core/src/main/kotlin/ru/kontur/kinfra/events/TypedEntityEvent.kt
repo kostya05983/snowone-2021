@@ -1,4 +1,4 @@
-package ru.kontur.kinfra
+package ru.kontur.kinfra.events
 
 interface TypedEntityEvent : Event {
     val type: EntityType

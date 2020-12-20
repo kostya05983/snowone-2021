@@ -1,0 +1,20 @@
+dependencies {
+    implementation project(":core")
+    implementation project(":model")
+    implementation "org.springframework.boot:spring-boot-starter-webflux:${versions.springBoot}"
+    implementation "org.springframework.data:spring-data-mongodb"
+
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-reactor"
+}
+
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}

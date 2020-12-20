@@ -1,4 +1,4 @@
-package ru.kontur.kinfra
+package ru.kontur.kinfra.events
 
 import com.mongodb.client.model.changestream.ChangeStreamDocument
 import com.mongodb.reactivestreams.client.MongoDatabase
