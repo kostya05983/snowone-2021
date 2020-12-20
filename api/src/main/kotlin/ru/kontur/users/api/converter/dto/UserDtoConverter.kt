@@ -8,6 +8,7 @@ object UserDtoConverter : Converter<User, UserDto> {
     override fun convert(source: User): UserDto? {
         return UserDto(
             id = source.id,
+            state = UserStateDtoConverter.convert(source.state),
             email = source.email,
             name = source.name,
             surname = source.surname,

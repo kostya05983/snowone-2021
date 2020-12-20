@@ -6,6 +6,8 @@ import ru.kontur.users.api.model.users.events.UserDomainEvent
 data class User(
     val id: String = ObjectId().toHexString(),
 
+    val state: UserState = UserState.CREATING,
+
     val email: String,
 
     val name: String,
