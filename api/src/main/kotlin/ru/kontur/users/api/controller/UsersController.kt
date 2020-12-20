@@ -14,12 +14,18 @@ import ru.kontur.users.api.service.UsersService
 class UsersController(
     private val usersService: UsersService
 ) {
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     suspend fun createUser(
         @RequestBody request: CreateUserRequest
     ) {
         usersService.create(request)
+    }
+
+    @GetMapping(value = ["/{id}"])
+    suspend fun getUser(
+        @PathVariable id: String
+    ) {
+        usersService.get(id)
     }
 }

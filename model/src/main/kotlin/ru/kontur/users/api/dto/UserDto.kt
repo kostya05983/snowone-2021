@@ -1,11 +1,10 @@
 package ru.kontur.users.api.dto
 
-import ru.kontur.users.api.model.UserRole
-
-data class CreateUserRequest(
+data class UserDto(
+    val id: String,
     val email: String,
     val name: String,
     val surname: String,
     val patronymic: String?,
-    val role: UserRole
+    val role: UserRoleDto
 )
