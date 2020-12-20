@@ -1,6 +1,6 @@
 package ru.kontur.kinfra
 
-open class DatabaseEvent<ACTION>(
-    var traceId: String,
-    var actions: List<ACTION>
-)
+abstract class DatabaseEvent<ACTION> {
+    abstract var traceId: String
+    abstract var actions: List<ACTION>
+}
