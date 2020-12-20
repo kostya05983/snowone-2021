@@ -1,6 +1,11 @@
 package ru.kontur.kinfra
 
-abstract class EntityEvent(
-    override val id: String,
-    val entityId: String
-) : Event
+import java.time.Instant
+import java.util.*
+
+abstract class EntityEvent<ACTION : Action> : TypedEntityEvent {
+    abstract val entityId: String
+    abstract val timestamp: Instant
+    abstract val traceId: UUID
+    abstract val actions: List<ACTION>
+}
