@@ -13,12 +13,13 @@ data class UserEntityEvent(
     override val type: EntityType,
     override val entityId: String,
     override val timestamp: Instant,
-    override val traceId: UUID,
+    override val traceId: String,
     override val actions: List<UserAction>
 ) : EntityEvent<UserAction>()
 
 data class UserDomainEvent(
     override var traceId: String,
+    override var timestamp: Instant,
     override var actions: List<UserAction>
 ) : DatabaseEvent<UserAction>()
 
