@@ -1,7 +1,7 @@
 package ru.kontur.kinfra.events
 
-import reactor.core.publisher.Flux
+import kotlinx.coroutines.flow.Flow
 
 interface EventSourceable<T> {
-    fun events(resumeAfter: String? = null): Flux<out T>
+    fun events(resumeAfter: String? = null): Flow<T>
 }
