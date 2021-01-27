@@ -2,7 +2,7 @@ dependencies {
     implementation project(":core:service")
     implementation project(":model")
 
-    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:3.0.0'
+    implementation "io.ktor:ktor-client-cio:${versions.ktor}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-reactor"
 }
 

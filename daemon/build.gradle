@@ -1,6 +1,7 @@
 dependencies {
     implementation project(":core:service")
     implementation project(":model")
+    implementation project(":client")
     implementation "org.springframework.boot:spring-boot-starter-webflux:${versions.springBoot}"
     implementation "org.springframework.data:spring-data-mongodb"
 

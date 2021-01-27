@@ -12,7 +12,8 @@ ext {
             ktorClient    : "1.2.5",
             springDoc     : "1.4.3",
             springCloud   : '3.0.8.RELEASE',
-            springNats    : '0.4.0'
+            springNats    : '0.4.0',
+            ktor          : '1.5.0'
     ]
 }
 
