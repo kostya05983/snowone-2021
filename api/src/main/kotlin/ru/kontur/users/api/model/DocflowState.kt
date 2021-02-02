@@ -1,6 +1,6 @@
 package ru.kontur.users.api.model
 
-enum class UserState {
+enum class DocflowState {
     CREATING,
     CREATED
 }

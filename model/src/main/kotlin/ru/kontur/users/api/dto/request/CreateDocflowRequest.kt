@@ -2,7 +2,7 @@ package ru.kontur.users.api.dto.request
 
 import ru.kontur.users.api.dto.users.UserRoleDto
 
-data class CreateUserRequest(
+data class CreateDocflowRequest(
     val email: String,
     val name: String,
     val surname: String,
