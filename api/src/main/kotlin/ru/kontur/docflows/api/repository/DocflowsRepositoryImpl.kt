@@ -9,12 +9,22 @@ import org.springframework.data.mongodb.core.query.Query
 import org.springframework.data.mongodb.core.query.Update
 import org.springframework.data.mongodb.core.query.isEqualTo
 import org.springframework.stereotype.Component
-import ru.kontur.users.api.model.Docflow
+import ru.kontur.docflows.api.model.Docflow
+import ru.kontur.docflows.api.model.docflows.events.DocflowAction
+import ru.kontur.docflows.api.model.docflows.events.DocflowDomainEvent
+import ru.kontur.docflows.api.model.docflows.events.DocflowEntityEvent
+import ru.kontur.kinfra.events.EntityType
+import ru.kontur.kinfra.events.MongoEntityEventSource
 
 @Component
 class DocflowsRepositoryImpl(
     private val template: ReactiveMongoTemplate
-) : DocflowsRepository {
+) : DocflowsRepository, MongoEntityEventSource<DocflowEntityEvent, DocflowAction, DocflowDomainEvent>(
+    template,
+    Docflow::class,
+    DocflowDomainEvent::class,
+    entityType = EntityType.DOCFLOWS
+) {
     override suspend fun save(docflow: Docflow): Docflow {
         return template.save(docflow).awaitFirst()
     }

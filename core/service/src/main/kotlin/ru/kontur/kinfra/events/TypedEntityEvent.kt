@@ -5,5 +5,5 @@ interface TypedEntityEvent : Event {
 }
 
 enum class EntityType {
-    USERS
+    DOCFLOWS
 }

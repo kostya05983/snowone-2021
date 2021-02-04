@@ -3,10 +3,15 @@ package ru.kontur.kinfra.events
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate
 import kotlin.reflect.KClass
 
-abstract class MongoEntityEventSource<EVENT : EntityEvent<ACTION>, ACTION : Action>(
+abstract class MongoEntityEventSource<EVENT : EntityEvent<ACTION>, ACTION : Action, DATA : DatabaseEvent<ACTION>>(
     mongoTemplate: ReactiveMongoTemplate,
     clazz: KClass<*>,
-    private val entityEventReader: EntityEventReader<DatabaseEvent<ACTION>>,
+    databaseClazz: KClass<DATA>,
+    private val entityEventReader: EntityEventReader<DATA> = CompositeEventReader(
+        mongoTemplate,
+        "event",
+        databaseClazz
+    ),
     private val entityType: EntityType
 ) : MongoEventSource<EVENT>(
     requireNotNull(mongoTemplate.mongoDatabase.block()) { "Something wrong database can't be null" },

@@ -27,9 +27,9 @@ sealed class DocflowAction(
     override var eventId: UUID
 ) : Action()
 
-data class GiveAccessAction(
+data class CreateOnTransportAction(
     override var eventId: UUID,
-    val role: UserRole
+    val name: String
 ) : DocflowAction(eventId)
 
 data class SendNotificationAction(

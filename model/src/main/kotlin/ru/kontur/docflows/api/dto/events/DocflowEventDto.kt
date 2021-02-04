@@ -14,13 +14,13 @@ sealed class DocflowActionDto(
     val type: DocflowActionTypeDto
 )
 
-data class SendNotificationAction(
+data class SendNotificationActionDto(
     val email: String
 ) : DocflowActionDto(
     type = DocflowActionTypeDto.SEND_NOTIFICATION
 )
 
-data class CreateOnTransportAction(
+data class CreateOnTransportActionDto(
     val name: String
 ) : DocflowActionDto(DocflowActionTypeDto.TRANSPORT_CREATE)
 
