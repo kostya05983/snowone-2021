@@ -20,7 +20,9 @@ data class DocflowEntityEvent(
 data class DocflowDomainEvent(
     override var traceId: String,
     override var timestamp: Instant,
-    override var actions: List<DocflowAction>
+    override var actions: List<DocflowAction>,
+    val correlationId: String,
+    val queueName: String
 ) : DatabaseEvent<DocflowAction>()
 
 sealed class DocflowAction(

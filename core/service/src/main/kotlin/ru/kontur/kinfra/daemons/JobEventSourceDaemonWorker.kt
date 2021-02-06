@@ -2,7 +2,6 @@ package ru.kontur.kinfra.daemons
 
 import kotlinx.coroutines.flow.buffer
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.reactive.asFlow
 import ru.kontur.kinfra.events.Event
 import ru.kontur.kinfra.events.EventSourceable
 import kotlin.Exception
@@ -12,12 +11,7 @@ abstract class JobEventSourceDaemonWorker<out E : Event>(
 ) : SequentialDaemonWorker() {
     override suspend fun handle() {
         try {
-            eventSource.events().doOnComplete {
-                logger.info("Flux was completed")
-            }.doOnError {
-                logger.info("Flux was completed with error $it")
-            }.asFlow()
-                .buffer(BACKPRESSURE_SIZE)
+            eventSource.events().buffer(BACKPRESSURE_SIZE)
                 .collect { event ->
                     when (handleInternal(event)) {
                         true -> {

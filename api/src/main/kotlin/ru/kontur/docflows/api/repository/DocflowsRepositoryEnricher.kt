@@ -2,7 +2,7 @@ package ru.kontur.docflows.api.repository
 
 import org.springframework.context.annotation.Primary
 import org.springframework.stereotype.Component
-import ru.kontur.users.api.model.Docflow
+import ru.kontur.docflows.api.model.Docflow
 
 @Component
 @Primary

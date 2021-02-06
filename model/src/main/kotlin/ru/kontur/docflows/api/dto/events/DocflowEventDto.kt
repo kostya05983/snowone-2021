@@ -7,7 +7,8 @@ data class DocflowEventDto(
     override val id: String,
     val entityId: String,
     val timestamp: Instant,
-    val actions: List<DocflowActionDto>
+    val actions: List<DocflowActionDto>,
+    val queueName: String
 ) : Event
 
 sealed class DocflowActionDto(
