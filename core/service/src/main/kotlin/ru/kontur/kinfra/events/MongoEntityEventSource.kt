@@ -14,7 +14,7 @@ abstract class MongoEntityEventSource<EVENT : EntityEvent<ACTION>, ACTION : Acti
     ),
     private val entityType: EntityType
 ) : MongoEventSource<EVENT>(
-    requireNotNull(mongoTemplate.mongoDatabase.block()) { "Something wrong database can't be null" },
+    requireNotNull(mongoTemplate.mongoDatabase.block()) { "Something went wrong database can't be null" },
     mongoTemplate.getCollectionName(clazz.java)
 ) {
     override fun eventMapper(mongoEvent: MongoEvent): EVENT? {
