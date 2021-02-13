@@ -113,15 +113,20 @@ open class RabbitSyncAsyncTaskQueue<T : Task>(
             return try {
                 receiver.consumeManualAck(workQueue, ConsumeOptions().qos(DEFAULT_QOS))
                     .timeout(RECIEVER_DEFAULT_TIMEOUT)
-                    .map { rabbitTask ->
+                    .flatMap { rabbitTask ->
                         val contentType = rabbitTask.properties.contentType
                         require(contentType == serializer.contentType) {
                             "Can't " +
                                 "deserialize $contentType"
                         }
-                        serializer.deserialize(rabbitTask.body)
-                    }.filter {
-                        it.correlationId == correlationId
+                        val task = serializer.deserialize(rabbitTask.body)
+                        if (task.correlationId == correlationId) {
+                            rabbitTask.ack()
+                            Mono.just(task)
+                        } else {
+                            rabbitTask.nack(true)
+                            Mono.empty()
+                        }
                     }.map { rabbitTask ->
                         OperationResult.success(rabbitTask)
                     }.doOnError { ex ->
