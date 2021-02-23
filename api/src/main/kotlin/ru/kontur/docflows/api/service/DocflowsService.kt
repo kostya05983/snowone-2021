@@ -2,6 +2,7 @@ package ru.kontur.docflows.api.service
 
 import org.springframework.stereotype.Component
 import ru.kontur.docflows.api.converter.dto.DocflowDtoConverter
+import ru.kontur.docflows.api.converter.model.DocflowTypeConverter
 import ru.kontur.docflows.api.dto.request.CreateDocflowRequest
 import ru.kontur.docflows.api.dto.request.UpdateRequest
 import ru.kontur.docflows.api.dto.docflows.DocflowDto
@@ -19,7 +20,8 @@ class DocflowsService(
     suspend fun create(request: CreateDocflowRequest) {
         val user = Docflow(
             name = request.name,
-            meta = ""
+            meta = "",
+            type = DocflowTypeConverter.convert(request.type)
         )
         return docflowsRepository.save(user).let {
             DocflowDtoConverter.convert(it)

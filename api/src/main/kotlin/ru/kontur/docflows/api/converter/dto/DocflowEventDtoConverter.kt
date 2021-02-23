@@ -10,18 +10,22 @@ object DocflowEventDtoConverter : Converter<DocflowEntityEvent, DocflowEventDto>
     override fun convert(source: DocflowEntityEvent): DocflowEventDto {
         return DocflowEventDto(
             id = source.id,
+            traceId = source.traceId,
             entityId = source.entityId,
             timestamp = source.timestamp,
+            correlationId = source.correlationId,
             actions = source.actions.map {
                 when (it) {
                     is CreateOnTransportAction -> {
                         CreateOnTransportActionDto(
-                            it.name
+                            it.name,
+                            docflowType = DocflowTypeDtoConverter.convert(it.type)
                         )
                     }
                     is SendNotificationAction -> {
                         SendNotificationActionDto(
-                            it.email
+                            it.email,
+                            docflowType = DocflowTypeDtoConverter.convert(it.type)
                         )
                     }
                 }

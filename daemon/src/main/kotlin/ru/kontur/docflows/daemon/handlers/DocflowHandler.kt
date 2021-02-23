@@ -1,6 +1,8 @@
 package ru.kontur.docflows.daemon.handlers
 
+import kotlinx.coroutines.delay
 import org.springframework.stereotype.Component
+import ru.kontur.docflows.api.dto.docflows.DocflowTypeDto
 import ru.kontur.docflows.api.dto.events.CreateOnTransportActionDto
 import ru.kontur.docflows.api.dto.events.DocflowEventDto
 import ru.kontur.docflows.api.dto.events.SendNotificationActionDto
@@ -17,25 +19,28 @@ class DocflowHandler(
     override suspend fun handle(item: DocflowEventDto) {
         item.actions.forEach {
             when (it) {
-                is SendNotificationActionDto -> sendNotification()
-                is CreateOnTransportActionDto -> createOnTransport()
+                is SendNotificationActionDto -> makeWork(it.docflowType)
+                is CreateOnTransportActionDto -> makeWork(it.docflowType)
             }
+
+            val sender = queueFactory.sender(QUEUE_NAME, JsonSerializer(DocflowCreatedResponseRto::class.java))
+            val task = DocflowCreatedResponseRto(
+                correlationId = item.correlationId,
+                traceId = item.traceId
+            )
+            sender.send(task)
         }
     }
 
-    suspend fun sendNotification(traceId: UUID, correlationId: String) {
-        TODO("logging")
-
-        val sender = queueFactory.sender(QUEUE_NAME, JsonSerializer(DocflowCreatedResponseRto::class.java))
-        val task = DocflowCreatedResponseRto(
-            correlationId = correlationId,
-            traceId = traceId
-        )
-        sender.send(task)
-    }
-
-    fun createOnTransport() {
-        TODO("logging")
+    private suspend fun makeWork(type: DocflowTypeDto) {
+        when (type) {
+            DocflowTypeDto.EASY_WORK -> {
+                delay((100 + 100 * Random().nextInt(10)).toLong())
+            }
+            DocflowTypeDto.HARD_WORK -> {
+                delay((5000 + 1000 * Random().nextInt(10)).toLong())
+            }
+        }
     }
 
     private companion object {

@@ -1,5 +1,5 @@
 dependencies {
-    implementation project(":core:service")
+    implementation project(":core:autoconfiguration")
     implementation project(":model")
     implementation project(":client")
     implementation project(":event-model")

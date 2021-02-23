@@ -10,17 +10,29 @@ import ru.kontur.docflows.api.DocflowsClientImpl
 import ru.kontur.docflows.api.dto.events.DocflowEventDto
 import ru.kontur.kinfra.client.RSocketEventClient
 import ru.kontur.kinfra.events.EventSourceable
+import ru.kontur.kinfra.queue.RabbitSyncAsyncQueueFactory
+import ru.kontur.kinfra.queue.impl.RabbitConnectionOptions
+import ru.kontur.kinfra.queue.impl.RabbitSyncAsyncQueueFactoryImpl
 import ru.kontur.kinfra.states.MongoStateStorageImpl
 import ru.kontur.kinfra.states.StateStorage
 import java.net.URI
 
 @Configuration
-class DaemonConfiguration {
+class DaemonConfiguration(
+    private val connectionOptions: RabbitConnectionOptions
+) {
+    @Bean
+    fun rabbitSyncAsyncQueueFactory(): RabbitSyncAsyncQueueFactory {
+        return RabbitSyncAsyncQueueFactoryImpl(
+            connectionOptions
+        )
+    }
+
     @Bean
     fun docflowsStream(rSocketStrategies: RSocketStrategies): EventSourceable<DocflowEventDto> {
         return RSocketEventClient(
-            host = URI.create("localhost:8080"),
-            path = "/snow-one/docflows/",
+            host = URI.create("http://127.0.0.1:8080"),
+            path = "/snow-one/docflows",
             eventType = DocflowEventDto::class,
             route = "docflowEventStream",
             rSocketStrategies = rSocketStrategies

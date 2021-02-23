@@ -1,10 +1,10 @@
 package ru.kontur.docflows.api.model.docflows.events
 
+import ru.kontur.docflows.api.model.DocflowType
 import ru.kontur.kinfra.events.Action
 import ru.kontur.kinfra.events.DatabaseEvent
 import ru.kontur.kinfra.events.EntityEvent
 import ru.kontur.kinfra.events.EntityType
-import ru.kontur.docflows.api.model.UserRole
 import java.time.Instant
 import java.util.*
 
@@ -14,6 +14,7 @@ data class DocflowEntityEvent(
     override val entityId: String,
     override val timestamp: Instant,
     override val traceId: String,
+    val correlationId: String,
     override val actions: List<DocflowAction>
 ) : EntityEvent<DocflowAction>()
 
@@ -30,10 +31,12 @@ sealed class DocflowAction(
 
 data class CreateOnTransportAction(
     override var eventId: UUID,
-    val name: String
+    val name: String,
+    val type: DocflowType
 ) : DocflowAction(eventId)
 
 data class SendNotificationAction(
     override var eventId: UUID,
-    val email: String
+    val email: String,
+    val type: DocflowType
 ) : DocflowAction(eventId)

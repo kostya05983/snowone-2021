@@ -6,6 +6,8 @@ import ru.kontur.docflows.api.model.docflows.events.DocflowDomainEvent
 data class Docflow(
     val id: String = ObjectId().toHexString(),
 
+    val type: DocflowType,
+
     val state: DocflowState = DocflowState.CREATING,
 
     val name: String,

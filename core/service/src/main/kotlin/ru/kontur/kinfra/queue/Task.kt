@@ -6,6 +6,6 @@ import java.util.*
 abstract class Task : Event {
     override val id: String = UUID.randomUUID().toString()
     open val taskId: UUID = UUID.randomUUID()
-    abstract val traceId: UUID
+    abstract val traceId: String
     abstract val correlationId: String
 }

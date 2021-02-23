@@ -1,5 +1,24 @@
 server.port: 8080
 
+spring:
+  application.name: snow-one-api
+  jackson:
+    mapper:
+      ACCEPT_CASE_INSENSITIVE_ENUMS: true
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: true
+    default-property-inclusion: non_null
+  aop:
+    proxy-target-class: false
+  main:
+    banner-mode: log
+    web-application-type: reactive
+  rsocket:
+    server:
+      mapping-path: /snow-one/docflows
+      transport: websocket
+
+
 kontur:
   rabbit:
     enabled: true

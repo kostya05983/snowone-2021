@@ -5,12 +5,13 @@ import ru.kontur.docflows.api.dto.docflows.DocflowDto
 import ru.kontur.docflows.api.model.Docflow
 
 object DocflowDtoConverter : Converter<Docflow, DocflowDto> {
-    override fun convert(source: Docflow): DocflowDto? {
+    override fun convert(source: Docflow): DocflowDto {
         return DocflowDto(
             id = source.id,
             state = DocflowStateDtoConverter.convert(source.state),
             name = source.name,
-            meta = source.meta
+            meta = source.meta,
+            type = DocflowTypeDtoConverter.convert(source.type)
         )
     }
 }
