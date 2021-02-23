@@ -1,5 +1,6 @@
 package ru.kontur.docflows.daemon.configuration
 
+import com.mongodb.reactivestreams.client.MongoClient
 import com.mongodb.reactivestreams.client.MongoClients
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -42,17 +43,17 @@ class DaemonConfiguration(
     @Bean
     fun docflowsClient(): DocflowsApiClient {
         return DocflowsClientImpl(
-            serverHost = "localhost:8080"
+            serverHost = "http://127.0.0.1:8080"
         )
     }
 
     @Bean
     fun docflowsSourceState(
-        template: ReactiveMongoTemplate
+        client: MongoClient
     ): StateStorage<String> {
         return MongoStateStorageImpl(
             "docflows-daemon-state",
-            MongoClients.create(),
+            client,
             "snowone"
         )
     }

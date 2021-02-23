@@ -1,10 +1,7 @@
 package ru.kontur.docflows.api.controller
 
 import org.springframework.http.MediaType
-import org.springframework.web.bind.annotation.PatchMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import ru.kontur.docflows.api.dto.request.UpdateRequest
 import ru.kontur.docflows.api.service.DocflowsService
 
@@ -17,7 +14,7 @@ class DocflowSystemController(
     private val docflowsService: DocflowsService
 ) {
     @PatchMapping("/{id}")
-    suspend fun updateState(@PathVariable id: String, request: UpdateRequest) {
+    suspend fun updateState(@PathVariable id: String, @RequestBody request: UpdateRequest) {
         docflowsService.update(id, request)
     }
 }

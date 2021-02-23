@@ -4,6 +4,9 @@ dependencies {
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-reactor"
     api 'org.mongodb:mongodb-driver-reactivestreams'
+
+    api 'com.fasterxml.jackson.core:jackson-databind'
+    api 'com.fasterxml.jackson.module:jackson-module-kotlin'
 }
 
 

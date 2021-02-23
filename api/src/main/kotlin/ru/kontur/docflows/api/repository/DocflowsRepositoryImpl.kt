@@ -15,6 +15,7 @@ import ru.kontur.docflows.api.model.docflows.events.DocflowDomainEvent
 import ru.kontur.docflows.api.model.docflows.events.DocflowEntityEvent
 import ru.kontur.kinfra.events.EntityType
 import ru.kontur.kinfra.events.MongoEntityEventSource
+import ru.kontur.kinfra.events.MongoEvent
 
 @Component
 class DocflowsRepositoryImpl(
@@ -25,6 +26,19 @@ class DocflowsRepositoryImpl(
     DocflowDomainEvent::class,
     entityType = EntityType.DOCFLOWS
 ) {
+    override fun eventMapper(mongoEvent: MongoEvent): DocflowEntityEvent? {
+        val dataBaseEvent = entityEventReader.read(mongoEvent) ?: return null
+        return DocflowEntityEvent(
+            id = mongoEvent.id,
+            type = entityType,
+            correlationId = dataBaseEvent.correlationId,
+            entityId = requireNotNull(mongoEvent.documentId) { "DocumentId can't be null" },
+            timestamp = dataBaseEvent.timestamp,
+            traceId = dataBaseEvent.traceId,
+            actions = dataBaseEvent.actions
+        )
+    }
+
     override suspend fun save(docflow: Docflow): Docflow {
         return template.save(docflow).awaitFirst()
     }

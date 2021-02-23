@@ -1,5 +1,7 @@
 package ru.kontur.docflows.api.dto.events
 
+import com.fasterxml.jackson.annotation.JsonSubTypes
+import com.fasterxml.jackson.annotation.JsonTypeInfo
 import ru.kontur.docflows.api.dto.docflows.DocflowTypeDto
 import ru.kontur.kinfra.events.Event
 import java.time.Instant
@@ -13,6 +15,11 @@ data class DocflowEventDto(
     val actions: List<DocflowActionDto>
 ) : Event
 
+@JsonTypeInfo(property = "type", use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY)
+@JsonSubTypes(
+    JsonSubTypes.Type(SendNotificationActionDto::class, name = "SEND_NOTIFICATION"),
+    JsonSubTypes.Type(CreateOnTransportActionDto::class, name = "TRANSPORT_CREATE")
+)
 sealed class DocflowActionDto(
     val type: DocflowActionTypeDto
 )

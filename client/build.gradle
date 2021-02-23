@@ -3,6 +3,7 @@ dependencies {
     implementation project(":model")
 
     implementation "io.ktor:ktor-client-cio:${versions.ktor}"
+    implementation "io.ktor:ktor-client-jackson:${versions.ktor}"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-reactor"
 }
 

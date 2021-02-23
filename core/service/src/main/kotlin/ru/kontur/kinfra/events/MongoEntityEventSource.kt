@@ -7,12 +7,12 @@ abstract class MongoEntityEventSource<EVENT : EntityEvent<ACTION>, ACTION : Acti
     mongoTemplate: ReactiveMongoTemplate,
     clazz: KClass<*>,
     databaseClazz: KClass<DATA>,
-    private val entityEventReader: EntityEventReader<DATA> = CompositeEventReader(
+    protected val entityEventReader: EntityEventReader<DATA> = CompositeEventReader(
         mongoTemplate,
         "event",
         databaseClazz
     ),
-    private val entityType: EntityType
+    protected val entityType: EntityType
 ) : MongoEventSource<EVENT>(
     requireNotNull(mongoTemplate.mongoDatabase.block()) { "Something went wrong database can't be null" },
     mongoTemplate.getCollectionName(clazz.java)

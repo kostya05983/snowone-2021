@@ -10,8 +10,6 @@ import ru.kontur.docflows.api.exceptions.DocflowNotFoundException
 import ru.kontur.docflows.api.exceptions.DocflowUpdateException
 import ru.kontur.docflows.api.model.Docflow
 import ru.kontur.docflows.api.model.DocflowState
-import ru.kontur.docflows.api.repository.DocflowsRepository
-import ru.kontur.docflows.api.repository.DocflowsRepositoryEnricher
 import ru.kontur.docflows.api.repository.DocflowsRepositoryRabbitSubscriber
 import ru.kontur.docflows.api.repository.UpdateDocflowData
 
@@ -19,7 +17,7 @@ import ru.kontur.docflows.api.repository.UpdateDocflowData
 class DocflowsService(
     private val docflowsRepository: DocflowsRepositoryRabbitSubscriber
 ) {
-    suspend fun create(request: CreateDocflowRequest) {
+    suspend fun create(request: CreateDocflowRequest): DocflowDto {
         val user = Docflow(
             name = request.name,
             meta = request.meta,

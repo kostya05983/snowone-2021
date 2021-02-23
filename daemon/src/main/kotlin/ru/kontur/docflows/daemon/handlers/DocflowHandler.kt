@@ -2,10 +2,13 @@ package ru.kontur.docflows.daemon.handlers
 
 import kotlinx.coroutines.delay
 import org.springframework.stereotype.Component
+import ru.kontur.docflows.api.DocflowsApiClient
+import ru.kontur.docflows.api.dto.docflows.DocflowStateDto
 import ru.kontur.docflows.api.dto.docflows.DocflowTypeDto
 import ru.kontur.docflows.api.dto.events.CreateOnTransportActionDto
 import ru.kontur.docflows.api.dto.events.DocflowEventDto
 import ru.kontur.docflows.api.dto.events.SendNotificationActionDto
+import ru.kontur.docflows.api.dto.request.UpdateRequest
 import ru.kontur.docflows.events.DocflowCreatedResponseRto
 import ru.kontur.kinfra.daemons.EventHandler
 import ru.kontur.kinfra.queue.RabbitSyncAsyncQueueFactory
@@ -14,7 +17,8 @@ import java.util.*
 
 @Component
 class DocflowHandler(
-    private val queueFactory: RabbitSyncAsyncQueueFactory
+    private val queueFactory: RabbitSyncAsyncQueueFactory,
+    private val docflowsClient: DocflowsApiClient
 ) : EventHandler<DocflowEventDto> {
     override suspend fun handle(item: DocflowEventDto) {
         item.actions.forEach {
@@ -22,6 +26,11 @@ class DocflowHandler(
                 is SendNotificationActionDto -> makeWork(it.docflowType)
                 is CreateOnTransportActionDto -> makeWork(it.docflowType)
             }
+
+            val request = UpdateRequest(
+                state = DocflowStateDto.CREATED
+            )
+            docflowsClient.update(item.entityId, request)
 
             val sender = queueFactory.sender(QUEUE_NAME, JsonSerializer(DocflowCreatedResponseRto::class.java))
             val task = DocflowCreatedResponseRto(
