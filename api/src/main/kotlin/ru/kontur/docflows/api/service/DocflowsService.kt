@@ -1,7 +1,7 @@
 package ru.kontur.docflows.api.service
 
 import org.springframework.stereotype.Component
-import ru.kontur.docflows.api.converter.dto.UserDtoConverter
+import ru.kontur.docflows.api.converter.dto.DocflowDtoConverter
 import ru.kontur.docflows.api.dto.request.CreateDocflowRequest
 import ru.kontur.docflows.api.dto.request.UpdateRequest
 import ru.kontur.docflows.api.dto.docflows.DocflowDto
@@ -22,7 +22,7 @@ class DocflowsService(
             meta = ""
         )
         return docflowsRepository.save(user).let {
-            UserDtoConverter.convert(it)
+            DocflowDtoConverter.convert(it)
         }
     }
 
@@ -37,7 +37,7 @@ class DocflowsService(
 
     suspend fun get(id: String): DocflowDto {
         return docflowsRepository.get(id)?.let {
-            UserDtoConverter.convert(it)
+            DocflowDtoConverter.convert(it)
         } ?: throw DocflowNotFoundException(id)
     }
 }

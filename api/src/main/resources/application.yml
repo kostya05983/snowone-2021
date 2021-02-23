@@ -1,0 +1,8 @@
+server.port: 8080
+
+kontur:
+  rabbit:
+    enabled: true
+    host: 172.17.0.2
+    username:
+    password:

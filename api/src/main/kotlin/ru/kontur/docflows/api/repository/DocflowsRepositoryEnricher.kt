@@ -7,7 +7,7 @@ import ru.kontur.docflows.api.model.Docflow
 @Component
 @Primary
 class DocflowsRepositoryEnricher(
-    private val delegate: DocflowsRepository
+    private val delegate: DocflowsRepositoryImpl
 ) : DocflowsRepository by delegate {
 
     override suspend fun save(docflow: Docflow): Docflow {

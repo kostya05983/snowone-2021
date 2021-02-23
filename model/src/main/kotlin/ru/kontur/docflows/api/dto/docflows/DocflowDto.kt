@@ -4,6 +4,5 @@ data class DocflowDto(
     val id: String,
     val state: DocflowStateDto,
     val name: String,
-    val meta: String,
-    val createdBy: String
+    val meta: String
 )
