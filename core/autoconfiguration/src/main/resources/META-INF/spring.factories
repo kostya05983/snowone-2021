@@ -1,2 +1,5 @@
+org.springframework.boot.env.EnvironmentPostProcessor=\
+ru.kontur.kinfra.mongodb.MongodbConfiguration
+
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 ru.kontur.kinfra.rabbit.RabbitAutoConfiguration

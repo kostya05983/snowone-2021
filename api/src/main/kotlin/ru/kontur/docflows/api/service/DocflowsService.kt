@@ -11,16 +11,19 @@ import ru.kontur.docflows.api.exceptions.DocflowUpdateException
 import ru.kontur.docflows.api.model.Docflow
 import ru.kontur.docflows.api.model.DocflowState
 import ru.kontur.docflows.api.repository.DocflowsRepository
+import ru.kontur.docflows.api.repository.DocflowsRepositoryEnricher
+import ru.kontur.docflows.api.repository.DocflowsRepositoryRabbitSubscriber
 import ru.kontur.docflows.api.repository.UpdateDocflowData
 
 @Component
 class DocflowsService(
-    private val docflowsRepository: DocflowsRepository
+    private val docflowsRepository: DocflowsRepositoryRabbitSubscriber
 ) {
     suspend fun create(request: CreateDocflowRequest) {
         val user = Docflow(
             name = request.name,
-            meta = "",
+            meta = request.meta,
+            email = request.email,
             type = DocflowTypeConverter.convert(request.type)
         )
         return docflowsRepository.save(user).let {

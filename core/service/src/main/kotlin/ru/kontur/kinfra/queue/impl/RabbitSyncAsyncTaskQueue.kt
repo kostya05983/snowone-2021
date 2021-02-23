@@ -216,7 +216,7 @@ open class RabbitSyncAsyncTaskQueue<T : Task>(
 
 
     private companion object {
-        val RECIEVER_DEFAULT_TIMEOUT: Duration = Duration.ofSeconds(7)
+        val RECIEVER_DEFAULT_TIMEOUT: Duration = Duration.ofSeconds(1)
         val DEFAULT_TIMEOUT: Duration = Duration.ofSeconds(20)
         val DEFAULT_RETRY_DELAY: Duration = Duration.ofMillis(500)
         val TTL_MESSAGE = "30000"

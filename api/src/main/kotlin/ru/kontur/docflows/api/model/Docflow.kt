@@ -12,6 +12,8 @@ data class Docflow(
 
     val name: String,
 
+    val email: String,
+
     val meta: String,
 
     val event: DocflowDomainEvent? = null

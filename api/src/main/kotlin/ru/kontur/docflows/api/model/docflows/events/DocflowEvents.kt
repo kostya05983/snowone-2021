@@ -25,18 +25,14 @@ data class DocflowDomainEvent(
     val correlationId: String
 ) : DatabaseEvent<DocflowAction>()
 
-sealed class DocflowAction(
-    override var eventId: UUID
-) : Action()
+sealed class DocflowAction : Action()
 
 data class CreateOnTransportAction(
-    override var eventId: UUID,
     val name: String,
     val type: DocflowType
-) : DocflowAction(eventId)
+) : DocflowAction()
 
 data class SendNotificationAction(
-    override var eventId: UUID,
     val email: String,
     val type: DocflowType
-) : DocflowAction(eventId)
+) : DocflowAction()
